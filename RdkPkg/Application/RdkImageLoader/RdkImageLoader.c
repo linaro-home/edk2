@@ -1,4 +1,4 @@
-
+/*
 #  Copyright (c) 2016-2017, Linaro Limited. All rights reserved.
 #
 #  This program and the accompanying materials
@@ -9,6 +9,7 @@
 #  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #
+*/
 #include <Library/BaseMemoryLib.h>
 #include "stdio.h" 
 

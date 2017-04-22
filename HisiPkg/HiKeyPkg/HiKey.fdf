@@ -50,10 +50,11 @@ NumBlocks     = 0xF0
 #
 ################################################################################
 
-0x00000000|0x000F0000
+0x00000000|0x000D0000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
 FV = FVMAIN_COMPACT
 
+!include VarStore.fdf.inc
 
 ################################################################################
 #
@@ -126,6 +127,12 @@ READ_LOCK_STATUS   = TRUE
   INF EmbeddedPkg/Drivers/DwMmcDxe/DwMmcDxe.inf
   INF HisiPkg/HiKeyPkg/Drivers/DwSdDxe/DwSdDxe.inf
 
+!if $(SECURE_BOOT_ENABLE) == TRUE
+  INF SecurityPkg/VariableAuthenticated/RuntimeDxe/VariableRuntimeDxe.inf
+  INF SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
+!else
+  INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
+!endif
   #
   # USB
   #
@@ -146,8 +153,8 @@ READ_LOCK_STATUS   = TRUE
   INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
 
   INF HisiPkg/HiKeyPkg/Drivers/BlockVariableDxe/BlockVariableDxe.inf
-  INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
   INF MdeModulePkg/Universal/FaultTolerantWriteDxe/FaultTolerantWriteDxe.inf
+
 
   INF MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
 

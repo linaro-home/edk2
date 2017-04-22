@@ -58,6 +58,8 @@ STATIC UINT16 mBootIndex = 0;
 #define HIKEY_BOOT_ENTRY_FASTBOOT          0
 #define HIKEY_BOOT_ENTRY_BOOT_EMMC         1    /* boot from eMMC */
 #define HIKEY_BOOT_ENTRY_BOOT_SD           2    /* boot from SD card */
+#define HIKEY_BOOT_ENTRY_RDK_SECURE        3    /* boot from flash */
+
 
 STATIC struct HiKeyBootEntry Entries[] = {
   [HIKEY_BOOT_ENTRY_FASTBOOT] = {
@@ -77,6 +79,12 @@ STATIC struct HiKeyBootEntry Entries[] = {
     L"dtb=hi6220-hikey.dtb console=ttyAMA3,115200 earlycon=pl011,0xf7113000 root=/dev/mmcblk1p2 rw rootwait initrd=initrd.img efi=noruntime",
     L"boot from SD card",
     LOAD_OPTION_CATEGORY_BOOT
+  },
+[HIKEY_BOOT_ENTRY_RDK_SECURE] = {
+    L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(6,GPT,5C0F213C-17E1-4149-88C8-8B50FB4EC70E,0x7000,0x20000)/\\EFI\\BOOT\\RDKImageLoader.efi",
+    NULL,
+    L"RdkSecureboot",
+    LOAD_OPTION_CATEGORY_APP
   }
 };
 

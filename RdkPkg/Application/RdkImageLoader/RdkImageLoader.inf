@@ -1,0 +1,106 @@
+#
+#  Copyright (c) 2016-2017, Linaro Limited. All rights reserved.
+#  Copyright (c) 2016-2017, comcast . All rights reserved.
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+
+[Defines]
+  INF_VERSION     = 0x00010006
+  BASE_NAME       = RDKImageLoader
+  FILE_GUID       = 901f54f2-9d70-9b89-9c0a-d9ca25379059
+  MODULE_TYPE     = UEFI_APPLICATION
+  VERSION_STRING  = 0.1
+  ENTRY_POINT     = RdkImageLoaderEntryPoint
+
+[Sources]
+  RdkImageLoader.c
+  RdkImageLoader.h
+
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  ArmPlatformPkg/ArmPlatformPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ShellPkg/ShellPkg.dec
+  EdkCompatibilityPkg/EdkCompatibilityPkg.dec
+  SecurityPkg/SecurityPkg.dec   
+  CryptoPkg/CryptoPkg.dec
+
+[Guids]
+  gFdtTableGuid
+
+[Guids]
+  gArmMpCoreInfoGuid
+  gEfiCertX509Guid
+  gEfiCertPkcs7Guid
+  gEfiCustomModeEnableGuid
+  gEfiImageSecurityDatabaseGuid
+  gFdtTableGuid
+
+[LibraryClasses]
+  DevicePathLib
+  ArmLib
+  BdsLib
+  DebugLib
+  DxeServicesTableLib
+  FdtLib
+  HiiLib
+  HobLib
+  PerformanceLib
+  SerialPortLib
+  TimerLib
+  UefiApplicationEntryPoint
+  UefiLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiApplicationEntryPoint
+  UefiRuntimeServicesTableLib
+
+
+[LibraryClasses.AARCH64]
+  ArmGicLib
+  PcdLib
+
+[Protocols]
+  gEfiLoadedImageProtocolGuid
+  gEfiDevicePathToTextProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiBootLogoProtocolGuid                      
+  gEfiLoadedImageDevicePathProtocolGuid        
+
+
+[FeaturePcd]
+  gArmTokenSpaceGuid.PcdArmLinuxSpinTable
+
+[FixedPcd]
+  gArmTokenSpaceGuid.PcdArmLinuxFdtMaxOffset
+  gArmTokenSpaceGuid.PcdArmLinuxFdtAlignment
+  gArmTokenSpaceGuid.PcdArmLinuxKernelMaxOffset
+
+[FixedPcd.ARM]
+  gArmTokenSpaceGuid.PcdArmLinuxAtagMaxOffset
+
+[Pcd.AARCH64]
+  gArmTokenSpaceGuid.PcdGicDistributorBase
+  gArmTokenSpaceGuid.PcdGicSgiIntId
+   gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow                         
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn                      
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution         
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution           
+
+

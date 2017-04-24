@@ -25,7 +25,7 @@
 #include <Guid/Fdt.h>
 
 #define RDK_LINUX_KERNEL_NAME               L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(6,GPT,5C0F213C-17E1-4149-88C8-8B50FB4EC70E,0x7000,0x20000)/EFI/BOOT/Image"
-#define RDK_FDT_NAME                        L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(6,GPT,5C0F213C-17E1-4149-88C8-8B50FB4EC70E,0x7000,0x20000)/EFI/BOOT/hikey.dtb"
+#define RDK_FDT_NAME                        L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(6,GPT,5C0F213C-17E1-4149-88C8-8B50FB4EC70E,0x7000,0x20000)/EFI/BOOT/hi6220-hikey.dtb"
 #define RDK_PK_KEY_FILE_NAME                L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(6,GPT,5C0F213C-17E1-4149-88C8-8B50FB4EC70E,0x7000,0x20000)/EFI/BOOT/PK.cer"
 #define RDK_KEK_KEY_FILE_NAME               L"VenHw(B549F005-4BD4-4020-A0CB-06F42BDA68C3)/HD(6,GPT,5C0F213C-17E1-4149-88C8-8B50FB4EC70E,0x7000,0x20000)/EFI/BOOT/KEK.cer"
 
@@ -503,7 +503,11 @@ RdkImageLoaderEntryPoint (
 	*ExitData=NULL;
 	FilePath = NULL;
 //        char dtb[]= "dtb=/EFI/BOOT/hikey.dtb";
-        char init[] = "initrd=/EFI/BOOT/initramfs";
+#ifdef SECURE_ROOTFS
+            char cmd[] = "initrd=/EFI/BOOT/initramfs root=/dev/mmcblk0p9";
+#else
+            char cmd[] = "root=/dev/mmcblk0p9";//root=/dev/disk/by-partlabel/system";
+#endif
 //         char load[100];
 	CHAR16  LoadOption[100];
   /*       int i,j;
@@ -633,7 +637,7 @@ RdkImageLoaderEntryPoint (
 			);
 
 	ASSERT_EFI_ERROR (Status);
-       UnicodeSPrintAsciiFormat(LoadOption,sizeof(LoadOption),init);
+       UnicodeSPrintAsciiFormat(LoadOption,sizeof(LoadOption),cmd);
 
 	Status = BS->HandleProtocol ( Handle, &gEfiLoadedImageProtocolGuid, (VOID **) &ImageInfo);
 	ASSERT_EFI_ERROR (Status);

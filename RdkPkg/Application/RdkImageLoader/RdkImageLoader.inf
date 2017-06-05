@@ -28,7 +28,8 @@
 [Sources]
   RdkImageLoader.c
   RdkImageLoader.h
-
+  RdkDiskIo.c
+  RdkDiskIo.h
 
 [Packages]
   ArmPkg/ArmPkg.dec
@@ -40,6 +41,7 @@
   EdkCompatibilityPkg/EdkCompatibilityPkg.dec
   SecurityPkg/SecurityPkg.dec   
   CryptoPkg/CryptoPkg.dec
+  HisiPkg/HisiPlatformPkg.dec 
 
 [Guids]
   gFdtTableGuid
@@ -82,7 +84,8 @@
   gEfiGraphicsOutputProtocolGuid
   gEfiBootLogoProtocolGuid                      
   gEfiLoadedImageDevicePathProtocolGuid        
-
+  gEfiDiskIoProtocolGuid
+  gEfiBlockIoProtocolGuid
 
 [FeaturePcd]
   gArmTokenSpaceGuid.PcdArmLinuxSpinTable
@@ -98,9 +101,8 @@
 [Pcd.AARCH64]
   gArmTokenSpaceGuid.PcdGicDistributorBase
   gArmTokenSpaceGuid.PcdGicSgiIntId
-   gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow                         
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow                         
   gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn                      
   gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution         
   gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution           
-
-
+  gHwTokenSpaceGuid.PcdAndroidFastbootNvmDevicePath
